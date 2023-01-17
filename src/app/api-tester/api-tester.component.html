@@ -1,0 +1,98 @@
+<div>
+  <div
+    *ngIf="error"
+    class="alert alert-danger alert-dismissible fade show my-alert"
+    role="alert"
+  >
+    <strong>Field Not Found!</strong> {{ errorText }}
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="alertClose()"
+    ></button>
+  </div>
+  <ng-container>
+    <div class="my-container">
+      <div class="row justify-content-center">
+        <div class="custom-row-1">
+          <div class="input-group mb-3">
+            <button
+              class="btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ selectedType }}
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" (click)="selectionChange('GET')"
+                  >GET</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" (click)="selectionChange('POST')"
+                  >POST</a
+                >
+              </li>
+            </ul>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Text input with dropdown button"
+              (change)="getUrl($event)"
+              [value]="url"
+              name="url"
+              placeholder="Enter URL Here"
+              class="form-control"
+            />
+            <button
+            type="button"
+            class="btn btn-outline-primary my-send"
+            (click)="onSend()"
+          >
+            Send
+          </button>
+            <span class="input-group-text clear-btn" id="inputGroup-sizing-sm" (click)="clearUrl()" ><img class="clear-btn-img" src="../../assets/trash.png"></span>
+          </div>
+        </div>
+        <div class="custom-row-2">
+          <label for="response">Body:</label>
+          <textarea
+            [disabled]="selectedType == 'GET'"
+            type="textarea"
+            class="form-control"
+            aria-label="Text input with dropdown button"
+            [placeholder]="
+              selectedType == 'GET'
+                ? 'Body Disabled For GET'
+                : 'Enter JSON Body Here'
+            "
+            (change)="getBody($event)"
+            name="body"
+            class="form-control body"
+          ></textarea>
+        </div>
+        <div class="custom-row-2">
+          <div>Respones:</div>
+          <div class="label-header">
+            <textarea
+              disabled
+              type="textarea"
+              class="form-control"
+              aria-label="Text input with dropdown button"
+              name="body"
+              class="form-control body disabled-area"
+            >
+            {{response|json}}
+            </textarea>
+          </div>
+        </div>
+        <div class="custom-row-3 text-center">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
